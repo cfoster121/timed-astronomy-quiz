@@ -1,10 +1,14 @@
 var ansCorrect = 0
-var ansWrong = 0
+
 var questionNumber = 0
+
+var scorePlacement = 0
 
 var correct = document.getElementById("correct")
 correct.textContent = "Correct Answers: 0 "
 
+
+//Quiz Questions, Answer Options, and Correct Answers//
 let quizQuestions = [
     {
         question: "How many planets are in our solar system?",
@@ -44,12 +48,14 @@ let quizQuestions = [
 ]
 
 
-
 //Number of Seconds on Timer
 var timeSec = 100
 var timerCount = document.getElementById('timer')
 var quiz = document.getElementById('quiz')
 var startButton = document.getElementById('start')
+var scores = document.getElementById('scores')
+
+//Timer Counts down, displays time left, and stops at 0//
 var timeLeft = function () {
     timeSec--;
     if (timeSec >= 0) {
@@ -57,7 +63,7 @@ var timeLeft = function () {
     }
 }
 
-//Timer
+//Timer - increments by 1 second, is hidden until user clicks start button//
 var timer
 function startQuiz() {
     timer = setInterval(timeLeft, 1000)
@@ -67,46 +73,94 @@ function startQuiz() {
 }
 
 
-
+//Quiz Question function//
 function getQuestion() {
     var currentQuestion = quizQuestions[questionNumber]
 
+    //Create H2 element containing question value//
     var questionH2 = document.createElement("h2")
     questionH2.textContent = currentQuestion.question;
     quiz.appendChild(questionH2)
 
-    console.log(currentQuestion.correct)
-
+    //Create 1 button displaying each answer option for each question//
     currentQuestion.answers.forEach((answer) => {
         var answerEl = document.createElement("button")
         answerEl.textContent = answer;
         quiz.appendChild(answerEl)
+
+        //Function executed when clicking answer buttons//        
         answerEl.onclick = function () {
-            console.log(answer)
-            console.log(currentQuestion.correct)
+
+            //If the answer is correct, add 1 to correct answer counter//
             if (answer === currentQuestion.correct) {
                 ansCorrect++
                 correct.textContent = "Correct Answers: " + ansCorrect + "\/7"
             }
+            //If answer is incorrect subtract 10 seconds from timer//
             else {
                 timeSec -= 10
             }
-            console.log("Next question")
+            //Move to next question//
             questionNumber++;
+
+            //If the current question index number is equal to the total length of the question array, stop timer and clear quiz//
             if (questionNumber == quizQuestions.length) {
                 quiz.innerHTML = "";
+
                 clearInterval(timer);
+            
             }
             else {
                 quiz.innerHTML = "";
                 getQuestion();
             }
-            
-           
         }
-
     })
 }
+
+//Array to store high score values//
+let highScoreInitials = []
+
+const submitScore = (evnt)=>{
+    evnt.preventDefault(); //prevent page from refreshing on click
+    let initialsInput = document.getElementById("initials").value; //Variable storing value submitted in form
+    highScoreInitials.push(initialsInput); //Add form value to highScoreTable array
+    document.querySelector("form").reset(); //Clear form
+    localStorage.setItem("ScoreInitials", JSON.stringify(highScoreInitials)); //Store array to local storage
+
+
+
+
+//on button click create new list item in ul from high score table array and append to page
+
+
+// var scoreValue = highScoreInitials[scorePlacement]
+
+document.getElementById("li1").append(localStorage.getItem("ScoreInitials")[0] + " --- " + ansCorrect);
+document.getElementById("li2").append(localStorage.getItem("ScoreInitials")[1] + " --- " + ansCorrect);
+document.getElementById("li3").append(localStorage.getItem("ScoreInitials")[2] + " --- " + ansCorrect);
+
+if (ansCorrect.li1 > ansCorrect.li2) {
+    console.log(li1);
+}
+}
+
+
+
+
+
+
+//Run submitScore when clicking Go button//
+document.getElementById("goBtn").addEventListener("click", submitScore);
+
+// initials = document.getElementById("initials").value
+// localStorage.setItem("Initials", initials);
+
+
+scores.removeAttribute("style");
+
+// localStorage.setItem("form", JSON.stringify("input"));
+console.log(localStorage);
 
 startButton.addEventListener("click", startQuiz)
 

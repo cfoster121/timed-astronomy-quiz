@@ -12,6 +12,10 @@ h1 {
     border-radius: 25px;
 }
 
+/* form {
+    display: none;
+} */
+
 #timer {
     color:red;
     font-weight: bold;
