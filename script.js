@@ -1,10 +1,15 @@
-var ansCorrect = 0
-var questionNumber = 0
-li1.innerHTML = localStorage.getItem("ScoreInitials");
+var timeSec = 31 //Number of Seconds on Timer
+var timerCount = document.getElementById('timer') 
+var quiz = document.getElementById('quiz')
+var startButton = document.getElementById('start')
+var scores = document.getElementById('scores')
+var ansCorrect = 0 //Number of quiz questions user answers correctly
+var questionNumber = 0 //Position of current question in quizQuestions array
+li1.innerHTML = localStorage.getItem("ScoreInitials"); //Display local storage as list item on page load
 
+//Section showing number of questions answered correctly as quiz is being taken
 var correct = document.getElementById("correct")
 correct.textContent = "Correct Answers: 0 "
-
 
 //Quiz Questions, Answer Options, and Correct Answers//
 let quizQuestions = [
@@ -45,14 +50,6 @@ let quizQuestions = [
     }
 ]
 
-
-//Number of Seconds on Timer
-var timeSec = 30
-var timerCount = document.getElementById('timer')
-var quiz = document.getElementById('quiz')
-var startButton = document.getElementById('start')
-var scores = document.getElementById('scores')
-
 //Timer Counts down, displays time left, and stops at 0//
 var timeLeft = function () {
     timeSec--;
@@ -65,15 +62,13 @@ var timeLeft = function () {
     }
 }
 
-//Timer - increments by 1 second, is hidden until user clicks start button//
-var timer
+//Fucntion executed when Start button is clicked
 function startQuiz() {
-    timer = setInterval(timeLeft, 1000)
-    timerCount.removeAttribute("style")
-    startButton.setAttribute("style", "display: none")
-    getQuestion()
+    timerCount.removeAttribute("style") //Timer displays on page
+    timer = setInterval(timeLeft, 1000) //Timer starts, decrements by 1 second
+    startButton.setAttribute("style", "display: none") //Start button hidden from page
+    getQuestion() //Run quiz question function
 }
-
 
 //Quiz Question function//
 function getQuestion() {
@@ -119,47 +114,22 @@ function getQuestion() {
     })
 }
 
-
+//Function executed when Save Score button is clicked
 const submitScore = (evnt) => {
     evnt.preventDefault(); //prevent page from refreshing on click
     if (document.querySelector("input").value == "") {
         alert("Must enter letters");
         return false; //User must input letters into form
     }
-
-    //Value saved to storage will be initials + correct answer
+    //Value saved to storage will be initials + correct answer value
     let saved = li1.innerHTML = document.querySelector("input").value + " --- " + ansCorrect;
     localStorage.setItem("ScoreInitials", saved); //Store saved to local storage
-    document.querySelector("form").reset(); //Clear form
+    document.querySelector("form").reset(); //Clear form after submit
 
 }
 
-
-//Run submitScore when clicking Go button//
-document.getElementById("goBtn").addEventListener("click", submitScore);
+//Run submitScore when clicking Save Score button//
+document.getElementById("saveScoreBtn").addEventListener("click", submitScore);
 
 //Start Quiz when clicking Start button//
 startButton.addEventListener("click", startQuiz);
-
-
-
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
-
-
-   //on button click create new list item in ul from high score table array and append to page
-
-
-
-    // document.getElementById("li1").append(localStorage.getItem("ScoreInitials")[0] + " --- " + scoreVal);
-    // document.getElementById("li2").append(localStorage.getItem("ScoreInitials")[1] + " --- " + ansCorrect);
-    // document.getElementById("li3").append(localStorage.getItem("ScoreInitials")[2] + " --- " + ansCorrect);

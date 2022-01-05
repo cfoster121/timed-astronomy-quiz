@@ -22,8 +22,7 @@ h1 {
 #correct {
     background-color: lavender;
     color:purple;
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     padding: 10px;
@@ -46,7 +45,7 @@ form {
     color: purple;
 }
 
-#goBtn {
+#saveScoreBtn {
     font-size: 20px;
 }
 
