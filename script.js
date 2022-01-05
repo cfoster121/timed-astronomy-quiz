@@ -7,24 +7,39 @@ correct.textContent = "Correct Answers: 0 "
 
 let quizQuestions = [
     {
-        question: "question 1 text",
-        answers: ["a", "b", "c"],
-        correct: "a"
+        question: "How many planets are in our solar system?",
+        answers: ["8", "10", "6"],
+        correct: "8"
     },
     {
-        question: "question 2 text",
-        answers: ["a", "b", "c"],
-        correct: "b"
+        question: "What is the largest planet in our solar system?",
+        answers: ["Saturn", "Jupiter", "Earth"],
+        correct: "Jupiter"
     },
     {
-        question: "question 3 text",
-        answers: ["a", "b", "c"],
-        correct: "c"
+        question: "How many moons does Mars have?",
+        answers: ["3", "6", "2"],
+        correct: "2"
     },
     {
-        question: "question 4 text",
-        answers: ["a", "b", "c"],
-        correct: "d"
+        question: "Which of these planets has rings?",
+        answers: ["Earth", "Uranus", "Mercury"],
+        correct: "Uranus"
+    },
+    {
+        question: "How many gaseous planets are in our solar system?",
+        answers: ["4", "2", "5"],
+        correct: "4"
+    },
+    {
+        question: "Which of these is not a gas giant?",
+        answers: ["Saturn", "Uranus", "Venus"],
+        correct: "Venus"
+    },
+    {
+        question: "How many times larger is Jupiter than Earth?",
+        answers: ["100", "23", "11"],
+        correct: "11"
     }
 ]
 
@@ -71,7 +86,7 @@ function getQuestion() {
             console.log(currentQuestion.correct)
             if (answer === currentQuestion.correct) {
                 ansCorrect++
-                correct.textContent = "answers correct: " + ansCorrect
+                correct.textContent = "Correct Answers: " + ansCorrect + "\/7"
             }
             else {
                 timeSec -= 10
