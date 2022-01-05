@@ -2,8 +2,6 @@ var ansCorrect = 0
 
 var questionNumber = 0
 
-var scorePlacement = 0
-
 var correct = document.getElementById("correct")
 correct.textContent = "Correct Answers: 0 "
 
@@ -49,7 +47,7 @@ let quizQuestions = [
 
 
 //Number of Seconds on Timer
-var timeSec = 100
+var timeSec = 30
 var timerCount = document.getElementById('timer')
 var quiz = document.getElementById('quiz')
 var startButton = document.getElementById('start')
@@ -59,7 +57,11 @@ var scores = document.getElementById('scores')
 var timeLeft = function () {
     timeSec--;
     if (timeSec >= 0) {
-        timerCount.textContent = timeSec
+        timerCount.textContent = timeSec;
+    }
+    if (timeSec === 0) {
+        alert("Out of time! Try again")
+        return
     }
 }
 
@@ -106,9 +108,8 @@ function getQuestion() {
             //If the current question index number is equal to the total length of the question array, stop timer and clear quiz//
             if (questionNumber == quizQuestions.length) {
                 quiz.innerHTML = "";
-
                 clearInterval(timer);
-            
+                document.getElementById("hide").removeAttribute("style");
             }
             else {
                 quiz.innerHTML = "";
@@ -118,51 +119,29 @@ function getQuestion() {
     })
 }
 
-//Array to store high score values//
-let highScoreInitials = []
 
-const submitScore = (evnt)=>{
+//Array score values//
+let highScoreInitials = ""
+let displayRecent = highScoreInitials + "  ---  " + ansCorrect
+
+const submitScore = (evnt) => {
     evnt.preventDefault(); //prevent page from refreshing on click
     let initialsInput = document.getElementById("initials").value; //Variable storing value submitted in form
-    highScoreInitials.push(initialsInput); //Add form value to highScoreTable array
+    highScoreInitials.concat(initialsInput); //Add form value to highScoreTable array
     document.querySelector("form").reset(); //Clear form
-    localStorage.setItem("ScoreInitials", JSON.stringify(highScoreInitials)); //Store array to local storage
+    localStorage.setItem("ScoreInitials", JSON.stringify(displayRecent)); //Store array to local storage
 
-
-
-
-//on button click create new list item in ul from high score table array and append to page
-
-
-// var scoreValue = highScoreInitials[scorePlacement]
-
-document.getElementById("li1").append(localStorage.getItem("ScoreInitials")[0] + " --- " + ansCorrect);
-document.getElementById("li2").append(localStorage.getItem("ScoreInitials")[1] + " --- " + ansCorrect);
-document.getElementById("li3").append(localStorage.getItem("ScoreInitials")[2] + " --- " + ansCorrect);
-
-if (ansCorrect.li1 > ansCorrect.li2) {
-    console.log(li1);
+    li1.innerHTML = localStorage.getItem("ScoreInitials");
 }
-}
-
-
-
-
 
 
 //Run submitScore when clicking Go button//
 document.getElementById("goBtn").addEventListener("click", submitScore);
 
-// initials = document.getElementById("initials").value
-// localStorage.setItem("Initials", initials);
+//Start Quiz when clicking Start button//
+startButton.addEventListener("click", startQuiz);
 
 
-scores.removeAttribute("style");
-
-// localStorage.setItem("form", JSON.stringify("input"));
-console.log(localStorage);
-
-startButton.addEventListener("click", startQuiz)
 
 // GIVEN I am taking a code quiz
 // WHEN I click the start button
@@ -177,3 +156,10 @@ startButton.addEventListener("click", startQuiz)
 // THEN I can save my initials and my score
 
 
+   //on button click create new list item in ul from high score table array and append to page
+
+
+
+    // document.getElementById("li1").append(localStorage.getItem("ScoreInitials")[0] + " --- " + scoreVal);
+    // document.getElementById("li2").append(localStorage.getItem("ScoreInitials")[1] + " --- " + ansCorrect);
+    // document.getElementById("li3").append(localStorage.getItem("ScoreInitials")[2] + " --- " + ansCorrect);

@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="./stylesheet.css">
 
-    <title>Timed Coding Quiz</title>
+    <title>Solar System Quiz</title>
 </head>
 
 <header>
-    <h1>Coding Quiz</h1>
+    <h1>Solar System Quiz</h1>
 </header>
 
 <p style="display: none" id="timer"></p>
@@ -17,24 +17,27 @@
 <div class="form" id="quiz">
     <button id="start">Start</button>
 
-    <form>
-        <div id="scores">
-            <label for="initials">Your Initials</label>
+
+</div>
+<br>
+<br>
+<br>
+<div>
+    <form id="hide" style="display: none;">
+        <div>
+            <label for="initials">Enter Initials</label>
             <input type="text" id="initials" name="initials">
         </div>
-        <div class="form">
-            <input type="submit" id="goBtn" value="Go">
+        <div>
+            <input type="submit" id="goBtn" value="Save Score">
         </div>
     </form>
-
-    <div>
-        <ul>
-            High Scores 
-            <li id="li1"></li>
-            <li id="li2"></li>
-            <li id="li3"></li>
-        </ul>
-    </div>
+    <br>
+    <br>
+    <ul>
+        Last Winner
+        <li id="li1"></li>
+    </ul>
 </div>
 
 <body>
