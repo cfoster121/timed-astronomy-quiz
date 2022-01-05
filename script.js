@@ -1,6 +1,6 @@
 var ansCorrect = 0
-
 var questionNumber = 0
+li1.innerHTML = localStorage.getItem("ScoreInitials");
 
 var correct = document.getElementById("correct")
 correct.textContent = "Correct Answers: 0 "
@@ -120,18 +120,18 @@ function getQuestion() {
 }
 
 
-//Array score values//
-let highScoreInitials = ""
-let displayRecent = highScoreInitials + "  ---  " + ansCorrect
-
 const submitScore = (evnt) => {
     evnt.preventDefault(); //prevent page from refreshing on click
-    let initialsInput = document.getElementById("initials").value; //Variable storing value submitted in form
-    highScoreInitials.concat(initialsInput); //Add form value to highScoreTable array
-    document.querySelector("form").reset(); //Clear form
-    localStorage.setItem("ScoreInitials", JSON.stringify(displayRecent)); //Store array to local storage
+    if (document.querySelector("input").value == "") {
+        alert("Must enter letters");
+        return false; //User must input letters into form
+    }
 
-    li1.innerHTML = localStorage.getItem("ScoreInitials");
+    //Value saved to storage will be initials + correct answer
+    let saved = li1.innerHTML = document.querySelector("input").value + " --- " + ansCorrect;
+    localStorage.setItem("ScoreInitials", saved); //Store saved to local storage
+    document.querySelector("form").reset(); //Clear form
+
 }
 
 
