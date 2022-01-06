@@ -4,8 +4,8 @@ User will enter the page to take a timed quiz and will be able to save their ini
 
 
 ## Essential Code
-*![Gif1](images/HW4-1.gif)
-*![Gif2](images/HW4-2.gif)
+* ![Gif1](images/HW4-1.gif)
+* ![Gif2](images/HW4-2.gif)
 
 ### Installing
 
@@ -35,7 +35,7 @@ User will enter the page to take a timed quiz and will be able to save their ini
 
 ## Author
 
-* **Courtney Foster** 
+**Courtney Foster** 
 
 - [Link to Portfolio Site](https://cfoster121.github.io/homework2/)
 - [Link to Github](https://github.com/cfoster121)
