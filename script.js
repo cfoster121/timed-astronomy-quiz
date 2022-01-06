@@ -1,11 +1,11 @@
 var timeSec = 31 //Number of Seconds on Timer
-var timerCount = document.getElementById('timer') 
+var timerCount = document.getElementById('timer')
 var quiz = document.getElementById('quiz')
 var startButton = document.getElementById('start')
 var scores = document.getElementById('scores')
 var ansCorrect = 0 //Number of quiz questions user answers correctly
 var questionNumber = 0 //Position of current question in quizQuestions array
-li1.innerHTML = localStorage.getItem("ScoreInitials"); //Display local storage as list item on page load
+
 
 //Section showing number of questions answered correctly as quiz is being taken
 var correct = document.getElementById("correct")
@@ -50,7 +50,25 @@ let quizQuestions = [
     }
 ]
 
-//Timer Counts down, displays time left, and stops at 0//
+//Function to create score board
+var displayScores = function() {
+    var savedHighScores = JSON.parse(localStorage.getItem("HighScores")) || []; //Creates array from HighScores object
+
+    //For each saved high score, create a list item with the text "Name --- Score"
+    savedHighScores.forEach((savedScoreboard)=> {
+        let savedName = savedScoreboard.name;
+        let savedScore = savedScoreboard.score;
+        let liEl = document.createElement("li")
+        liEl.textContent = `${savedName} --- ${savedScore}`;
+        var scoreboardEl = document.getElementById("scoreboard");
+        scoreboardEl.appendChild(liEl);
+    })
+};
+
+//Run displayScores function
+displayScores();
+
+//Timer Counts down, displays time left, and stops at 0
 var timeLeft = function () {
     timeSec--;
     if (timeSec >= 0) {
@@ -62,7 +80,7 @@ var timeLeft = function () {
     }
 }
 
-//Fucntion executed when Start button is clicked
+//Function executed when Start button is clicked
 function startQuiz() {
     timerCount.removeAttribute("style") //Timer displays on page
     timer = setInterval(timeLeft, 1000) //Timer starts, decrements by 1 second
@@ -117,15 +135,17 @@ function getQuestion() {
 //Function executed when Save Score button is clicked
 const submitScore = (evnt) => {
     evnt.preventDefault(); //prevent page from refreshing on click
+    var savedHighScores = JSON.parse(localStorage.getItem("HighScores")) || [];
     if (document.querySelector("input").value == "") {
         alert("Must enter letters");
         return false; //User must input letters into form
     }
+    let name = document.querySelector("input").value;
     //Value saved to storage will be initials + correct answer value
-    let saved = li1.innerHTML = document.querySelector("input").value + " --- " + ansCorrect;
-    localStorage.setItem("ScoreInitials", saved); //Store saved to local storage
+    let saved = { name, score: ansCorrect } //Create item for each name and score
+    savedHighScores.push(saved); //Push item into savedHighScores array
+    localStorage.setItem("HighScores", JSON.stringify(savedHighScores)); //Store array to local storage
     document.querySelector("form").reset(); //Clear form after submit
-
 }
 
 //Run submitScore when clicking Save Score button//
@@ -133,3 +153,4 @@ document.getElementById("saveScoreBtn").addEventListener("click", submitScore);
 
 //Start Quiz when clicking Start button//
 startButton.addEventListener("click", startQuiz);
+
