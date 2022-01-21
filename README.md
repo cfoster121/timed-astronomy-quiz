@@ -37,9 +37,14 @@ User will enter the page to take a timed quiz and will be able to save their ini
 
 **Courtney Foster** 
 
-- [Link to Portfolio Site](https://cfoster121.github.io/homework2/)
+- [Link to Portfolio Site](https://cfoster121.github.io/portfolio/)
 - [Link to Github](https://github.com/cfoster121)
 - [Link to LinkedIn](https://www.linkedin.com/in/courtney-foster-0b364575/)
+
+
+## License
+
+This project is licensed under the MIT License 
 
 
 ## Acknowledgments
