@@ -30,7 +30,7 @@ User will enter the page to take a timed quiz and will be able to save their ini
 
 ## Deployed Link
 
-* [See Live Site](https://cfoster121.github.io/timed-code-quiz/)
+* [See Live Site](https://cfoster121.github.io/timed-astronomy-quiz/)
 
 
 ## Author
